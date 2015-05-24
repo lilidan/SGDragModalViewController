@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>948C7DBD-CB97-4425-AA9D-D0AE7EE85F3E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SGDragModalViewControllerExample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2C0E7ECE8D7D5FEEE666506B8756BC67C3273415</key>
+		<string>github.com:lilidan/SGDragModalViewController.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SGDragModalViewControllerExample/SGDragModalViewControllerExample.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2C0E7ECE8D7D5FEEE666506B8756BC67C3273415</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:lilidan/SGDragModalViewController.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2C0E7ECE8D7D5FEEE666506B8756BC67C3273415</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2C0E7ECE8D7D5FEEE666506B8756BC67C3273415</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SGDragModalViewController</string>
+		</dict>
+	</array>
+</dict>
+</plist>
