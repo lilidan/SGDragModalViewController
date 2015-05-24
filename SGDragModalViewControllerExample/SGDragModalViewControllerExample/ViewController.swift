@@ -17,7 +17,8 @@ class ViewController: UIViewController,SGDragModalViewControllerDelegate{
         // Do any additional setup after loading the view, typically from a nib.
 
         let tableVC = UITableViewController(style: UITableViewStyle.Plain)
-        
+        tableVC.view.layer.borderColor = UIColor.lightGrayColor().CGColor
+        tableVC.view.layer.borderWidth = 1
         
         dragController = SGDragModalViewController(bgView: self.view, scrollView: tableVC.tableView, delegate: self)
     }

@@ -16,7 +16,7 @@ protocol SGDragModalViewControllerDelegate:class{
 enum SGDragModalStatus{
     case Down,Center,Up,Moving
 }
-class SGDragModalViewController:NSObject,UIGestureRecognizerDelegate,UIScrollViewDelegate{
+class SGDragModalViewController:NSObject,UIGestureRecognizerDelegate{
     weak var delegate:SGDragModalViewControllerDelegate?
     private var contentView:UIView!
     
@@ -25,6 +25,8 @@ class SGDragModalViewController:NSObject,UIGestureRecognizerDelegate,UIScrollVie
     
     var status:SGDragModalStatus = .Down
     
+    
+    //change these values to adjust contentView location
     private let CENTER_POSTION_Y = CGFloat(300)
     private let NAVIGATIONBAR_HEIGHT = CGFloat(64)
     
@@ -54,10 +56,16 @@ class SGDragModalViewController:NSObject,UIGestureRecognizerDelegate,UIScrollVie
         }
         contentView.frame = CGRect(origin:CGPoint(x:bgView.frame.origin.x, y:bgView.frame.size.height), size:CGSize(width:bgView.frame.size.width, height:0))
         scrollView.backgroundColor = UIColor.clearColor()
-        scrollView.delegate = self
         contentView.addSubview(scrollView)
         bgView.addSubview(self.contentView)
         
+        
+        
+        // set KVO 
+        
+        self.scrollView.addObserver(self, forKeyPath:"contentOffset", options: NSKeyValueObservingOptions.New, context: &mycontext)
+        
+        // set panGr
         contentViewPanGr = UIPanGestureRecognizer(target:self, action:"move:")
         contentViewPanGr.delegate = self
         contentView.addGestureRecognizer(contentViewPanGr)
@@ -65,15 +73,8 @@ class SGDragModalViewController:NSObject,UIGestureRecognizerDelegate,UIScrollVie
     
     
         
-    private var shouldScroll = false
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 || self.status != .Up{
-            scrollView.contentOffset.y = 0
-            shouldScroll = false
-        }else{
-            shouldScroll = true
-        }
-    }
+    
+    // MARK: - handle location
 
     private var draggedOriginalFrame:CGRect!
     private var floatItemOriginalPoint:CGPoint!
@@ -168,9 +169,38 @@ class SGDragModalViewController:NSObject,UIGestureRecognizerDelegate,UIScrollVie
         self.contentView.frame.size = CGSize(width:self.contentView.frame.size.width, height:self.bgView.frame.height - self.contentView.frame.origin.y)
         self.scrollView.frame = self.contentView.bounds
     }
+
+    
+    
+    
+    // MARK: - handle scrollView
+    
+    private var mycontext = 0
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        if object as NSObject == self.scrollView && context == &mycontext{
+            self.scrollViewDidScroll(self.scrollView)
+        }
+    }
+    
+    private var shouldScroll = false
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 || self.status != .Up{
+            dispatch_async(dispatch_get_main_queue()){
+                scrollView.contentOffset.y = 0
+            }
+            shouldScroll = false
+        }else{
+            shouldScroll = true
+        }
+    }
+    
+    
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
+    
+    
     
 }
