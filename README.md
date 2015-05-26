@@ -3,3 +3,7 @@ A scrollView controller can be dragged up/down/center. When it's in center the s
 
 
 ![](https://github.com/lilidan/SGDragModalViewController/blob/master/preview.gif) 
+
+
+## Installation
+Drag the swift file in your project. 
